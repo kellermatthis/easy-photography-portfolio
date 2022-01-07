@@ -86,14 +86,15 @@ class Query {
 	/**
 	 * Increase the posts per page limit
 	 */
+	/**
+	 * MODIFIED to enable footer pagination
+	 */
 	public function increase_ppp_limit( \WP_Query $query ) {
-
 		if ( $this->is_archive || $this->is_category ) {
-			$query->set( 'numberposts', 100 );
-			$query->set( 'posts_per_page', 100 );
+			$query->set( 'numberposts', -1 );               //Removes the 100 limit
+			$query->set( 'posts_per_page', get_option( 'posts_per_page' ) );
+			$query->set( 'paged', get_query_var('paged') );
 		}
-
-
 	}
 
 
